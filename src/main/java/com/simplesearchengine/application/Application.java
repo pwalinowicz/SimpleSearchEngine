@@ -11,9 +11,12 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
+/**
+ * Class handling the console behaviour.
+ */
 @SpringBootApplication
 public class Application implements CommandLineRunner {
-
 
 	//===== Fields =====
 	private final SearchEngine searchEngine;

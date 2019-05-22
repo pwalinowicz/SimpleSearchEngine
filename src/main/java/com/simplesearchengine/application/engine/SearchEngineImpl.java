@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Class implementing the search engine's functionality
+ */
 @Service
 public class SearchEngineImpl implements SearchEngine {
 
