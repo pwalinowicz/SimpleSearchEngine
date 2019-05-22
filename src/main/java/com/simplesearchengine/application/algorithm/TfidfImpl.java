@@ -9,7 +9,7 @@ import java.util.List;
  * Class implementing the tf-idf algorithm
  */
 @Component
-public class TfidfImpl implements WageAlgorithm{
+public class TfidfImpl implements WeightAlgorithm {
 
     //===== Methods =====
     /**
@@ -62,14 +62,14 @@ public class TfidfImpl implements WageAlgorithm{
     }
 
     /**
-     * Calculates the value of wage according to the implementation of the tf-idf algorithm.
+     * Calculates the value of weight according to the implementation of the tf-idf algorithm.
      * @param searchedWord - String which is searched in the documents
      * @param document - given document
      * @param allDocuments - all documents in the base
-     * @return value of the wage
+     * @return value of the weight
      */
     @Override
-    public double calculateWage(String searchedWord, Document document, List<Document> allDocuments) {
+    public double calculateWeight(String searchedWord, Document document, List<Document> allDocuments) {
         return tfidfWordInDocument(searchedWord, document, allDocuments);
     }
 }

@@ -10,7 +10,7 @@ public class Document{
     private String documentName;
     private int id;
     private String text;
-    private double statisticWage;
+    private double statisticWeight;
 
     //===== Constructor =====
     public Document(String documentName, String text) {
@@ -35,12 +35,12 @@ public class Document{
         this.text = text;
     }
 
-    public double getStatisticWage() {
-        return statisticWage;
+    public double getStatisticWeight() {
+        return statisticWeight;
     }
 
-    public void setStatisticWage(double statisticWage) {
-        this.statisticWage = statisticWage;
+    public void setStatisticWeight(double statisticWeight) {
+        this.statisticWeight = statisticWeight;
     }
 
     public void setDocumentName(String documentName) {

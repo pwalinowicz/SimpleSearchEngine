@@ -1,6 +1,6 @@
 package com.simplesearchengine.application.engine;
 
-import com.simplesearchengine.application.algorithm.WageAlgorithm;
+import com.simplesearchengine.application.algorithm.WeightAlgorithm;
 import com.simplesearchengine.application.base.Document;
 import com.simplesearchengine.application.base.IndexBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +22,19 @@ public class SearchEngineImpl implements SearchEngine {
 
     //===== Fields =====
     private final IndexBase indexBase;
-    private WageAlgorithm algorithmImpl;
+    private WeightAlgorithm algorithmImpl;
     private List<Document> allDocuments;
     private Comparator<Document> comparator;
 
     //===== Constructor =====
     @Autowired
-    public SearchEngineImpl(IndexBase indexBase, WageAlgorithm algorithmImpl) {
+    public SearchEngineImpl(IndexBase indexBase, WeightAlgorithm algorithmImpl) {
         this.indexBase = indexBase;
         this.algorithmImpl = algorithmImpl;
         this.allDocuments = new ArrayList<>();
 
-        //comparator sorting the documents descending based on the wage
-        this.comparator = Comparator.comparingDouble(Document::getStatisticWage).reversed();
+        //comparator sorting the documents descending based on the weight
+        this.comparator = Comparator.comparingDouble(Document::getStatisticWeight).reversed();
     }
 
     //===== Methods =====
@@ -47,10 +47,10 @@ public class SearchEngineImpl implements SearchEngine {
     }
 
     /**
-     * Setter enabling usage of different algorithm for calculation of wages than the default tf-idf.
+     * Setter enabling usage of different algorithm for calculation of weight than the default tf-idf.
      * @param algorithmImpl
      */
-    public void setAlgorithmImpl(WageAlgorithm algorithmImpl) {
+    public void setAlgorithmImpl(WeightAlgorithm algorithmImpl) {
         this.algorithmImpl = algorithmImpl;
     }
 
@@ -86,7 +86,7 @@ public class SearchEngineImpl implements SearchEngine {
 
     /**
      * Method searches for a given String in the base and returns list of Documents in which the searched String occurs.
-     * List is sorted basing on the value of the wage for each document in the list.
+     * List is sorted basing on the value of the weight for each document in the list.
      * @param index
      * @return List of Documents in which the searched String occurs
      */
@@ -95,11 +95,11 @@ public class SearchEngineImpl implements SearchEngine {
         //get the document list for the searched String
         List<Document> documentList = indexBase.searchIndex(index);
 
-        //if the list is valid then set wage for each document in the list and sort the list
+        //if the list is valid then set weight for each document in the list and sort the list
         if(documentList != null){
             for (Document document: documentList) {
-                document.setStatisticWage(algorithmImpl.calculateWage(index, document, allDocuments));
-                //setting the wages in accordance to the implemented algorithm
+                document.setStatisticWeight(algorithmImpl.calculateWeight(index, document, allDocuments));
+                //setting the weight in accordance to the implemented algorithm
             }
             return documentList.stream()
                     .sorted(comparator)
