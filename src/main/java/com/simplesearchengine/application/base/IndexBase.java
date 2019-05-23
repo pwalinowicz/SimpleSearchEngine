@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface IndexBase {
     boolean addAllIndexesFromDocument(Document document);
-    List<Document> searchIndex(String index);
+    List<Document> getListOfDocumentsForSearchedIndex(String index);
 }

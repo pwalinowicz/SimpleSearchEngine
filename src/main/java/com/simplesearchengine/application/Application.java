@@ -1,5 +1,6 @@
 package com.simplesearchengine.application;
 
+import com.simplesearchengine.application.base.Document;
 import com.simplesearchengine.application.engine.SearchEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -38,7 +40,7 @@ public class Application implements CommandLineRunner {
 	 * Takes place before the onStart method is called.
 	 */
 	@PostConstruct
-	public void populateBaseofIndexesFromResourceFolder(){
+	public void populateBaseOfIndexesFromResourceFolder(){
 		if(searchEngine != null){
 			try{
 				if(searchEngine.populateBaseOfIndexesFromResourceFolder(resourceFolder)) {
@@ -76,7 +78,7 @@ public class Application implements CommandLineRunner {
 							String searched = innerSc.nextLine();
 
 							searchEngine.printDocumentListWithGivenIndex(searched.trim());
-
+							System.out.println();
 							System.out.println("Do you want to make another search? Y/N");
 							searchDecision = innerSc.nextLine();
 						}
@@ -97,7 +99,6 @@ public class Application implements CommandLineRunner {
 	 * Method printing generic headlines of the menu
 	 */
 	private void printMenuHeadlines() {
-		System.out.println();
 		System.out.println("................................................");
 		System.out.println("What would you like to do?");
 		System.out.println("................................................");

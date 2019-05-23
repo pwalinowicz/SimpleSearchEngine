@@ -69,8 +69,12 @@ public class TfidfImpl implements WeightAlgorithm {
      * @return value of the weight
      */
     @Override
-    public double calculateWeight(String searchedWord, Document document, List<Document> allDocuments) {
-        return tfidfWordInDocument(searchedWord, document, allDocuments);
+    public Double calculateWeight(String searchedWord, Document document, List<Document> allDocuments) {
+        if(searchedWord != null && document != null && allDocuments != null){
+            return tfidfWordInDocument(searchedWord, document, allDocuments);
+        } else {
+            return null;
+        }
     }
 }
 

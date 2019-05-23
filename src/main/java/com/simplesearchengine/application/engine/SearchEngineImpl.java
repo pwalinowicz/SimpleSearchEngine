@@ -96,11 +96,12 @@ public class SearchEngineImpl implements SearchEngine {
     @Override
     public List<Document> getDocumentListWithGivenIndex(String index){
         //get the document list for the searched String
-        List<Document> documentList = indexBase.searchIndex(index);
+        List<Document> documentList = indexBase.getListOfDocumentsForSearchedIndex(index);
 
-        //if the list is valid then set weight for each document in the list and sort the list
-        if(documentList != null){
-            for (Document document: documentList) {
+        //if the index and list is valid then set weight for each document in the list and sort the list
+
+        if (documentList != null && index != null){
+            for (Document document : documentList){
                 document.setStatisticWeight(algorithmImpl.calculateWeight(index, document, allDocuments));
                 //setting the weight in accordance to the implemented algorithm
             }
@@ -144,7 +145,8 @@ public class SearchEngineImpl implements SearchEngine {
         // getting stream of paths of every file in the folder
 
         filePaths.forEach(filePath -> {
-            if (Files.isRegularFile(filePath)) {
+            //reads only files which are valid
+            if (Files.isRegularFile(filePath) && filePath.getFileName().toString().endsWith("txt")) {
                 try {
                     //if file is correct then read all the content, convert it to a Document object and add it to a list of documents to be added later
                     byte[] allBytes = Files.readAllBytes(filePath);
@@ -156,7 +158,7 @@ public class SearchEngineImpl implements SearchEngine {
                                     fileContent
                             )
                     );
-                } catch (Exception e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
