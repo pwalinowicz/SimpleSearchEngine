@@ -35,6 +35,7 @@ public class ApplicationTests {
         System.setOut(out);
     }
 
+    @Ignore
     @Test
     public void successfulPopulationShouldReturnCorrectMessage() {
         app.populateBaseOfIndexesFromResourceFolder();

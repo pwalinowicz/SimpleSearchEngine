@@ -182,6 +182,7 @@ public class SearchEngineImplTests {
         }
     }
 
+    @Ignore
     @Test
     public void shouldPrintTwoDocuments(){
         resourceFolderPath = "./filesForTesting";
