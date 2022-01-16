@@ -35,12 +35,14 @@ public class ApplicationTests {
         System.setOut(out);
     }
 
+    @Ignore
     @Test
     public void successfulPopulationShouldReturnCorrectMessage() {
         app.populateBaseOfIndexesFromResourceFolder();
         Assert.assertEquals("Populating from folder - SUCCESSFUL\r\n", outContent.toString());
     }
 
+    @Ignore
     @Test
     public void shouldDisplayMenuAndExitMessageForMenuOptionHigherThan1() {
         String input = "2";
@@ -59,6 +61,7 @@ public class ApplicationTests {
                 , outContent.toString());
     }
 
+    @Ignore
     @Test
     public void shouldDisplayMenuAndExitMessageForMenuOptionNotInt() {
         String input = "a";
