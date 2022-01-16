@@ -23,15 +23,25 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: mr-smithers-excellent/docker-build-push@v5
-      name: Build and Push Docker Image
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
       with:
-        image: pwalinowicz/simple-search-app
-        registry: docker.io
-        dockerfile: docker/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Docker build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: pwalinowicz/simple-search-app:latest
+
+#    - uses: mr-smithers-excellent/docker-build-push@v5
+#      name: Build and Push Docker Image
+#      with:
+#        image: pwalinowicz/simple-search-app
+#        registry: hub.docker.com
+#        dockerfile: docker/Dockerfile
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_PASSWORD }}
